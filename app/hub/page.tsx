@@ -69,7 +69,7 @@ export default function HubHome() {
               {modules.filter((m) => m.status !== "live").length} coming soon
             </p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-3">
             {modules.map((m) => (
               <ModuleCard key={m.slug} module={m} />
             ))}
@@ -138,36 +138,91 @@ function SetupRow({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-line bg-surface-soft/50 px-3 py-3">
-      <span
-        className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs font-bold text-white"
-        style={{ background: "var(--brand-red)" }}
-        aria-hidden
-      >
-        {step}
-      </span>
-      <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-ink">{label}</p>
-        {hint ? <p className="text-xs text-ink-soft">{hint}</p> : null}
+    <div className="rounded-xl border border-line bg-surface-soft/50 px-4 py-3">
+      <div className="flex items-start gap-3">
+        <span
+          className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs font-bold text-white"
+          style={{ background: "var(--brand-red)" }}
+          aria-hidden
+        >
+          {step}
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-semibold text-ink">{label}</p>
+          {hint ? <p className="text-xs text-ink-soft">{hint}</p> : null}
+        </div>
       </div>
-      <div className="shrink-0">{children}</div>
+      <div className="mt-3 pl-10">{children}</div>
     </div>
   );
 }
 
 function ModuleCard({ module: m }: { module: Module }) {
   const isLive = m.status === "live";
+  const baseRow =
+    "group relative flex items-start gap-4 rounded-2xl border border-line bg-white p-4 shadow-sm sm:p-5";
 
   if (isLive && m.href) {
     return (
       <Link
         href={m.href}
-        className="group relative flex flex-col gap-3 rounded-2xl border border-line bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+        className={`${baseRow} transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md`}
       >
-        <CardHeader module={m} isLive />
-        <CardBody module={m} isLive />
+        <CardIcon module={m} isLive />
+        <CardBody module={m} isLive showOpen />
+      </Link>
+    );
+  }
+
+  return (
+    <div aria-disabled className={`${baseRow} cursor-default opacity-80`}>
+      <CardIcon module={m} isLive={false} />
+      <CardBody module={m} isLive={false} showOpen={false} />
+    </div>
+  );
+}
+
+function CardIcon({ module: m, isLive }: { module: Module; isLive: boolean }) {
+  return (
+    <span
+      className="grid h-11 w-11 shrink-0 place-items-center rounded-xl"
+      style={{
+        background: isLive
+          ? "var(--brand-red-soft)"
+          : "var(--brand-surface-soft)",
+        color: isLive ? "var(--brand-red)" : "var(--brand-ink-soft)",
+      }}
+    >
+      {m.icon}
+    </span>
+  );
+}
+
+function CardBody({
+  module: m,
+  isLive,
+  showOpen,
+}: {
+  module: Module;
+  isLive: boolean;
+  showOpen: boolean;
+}) {
+  return (
+    <div className="min-w-0 flex-1">
+      <div className="flex items-start justify-between gap-3">
+        <h3
+          className={`text-base font-semibold tracking-tight ${
+            isLive ? "text-ink" : "text-ink-soft"
+          }`}
+        >
+          {m.name}
+        </h3>
+        <Badge status={m.status} />
+      </div>
+      <p className="mt-1 text-sm leading-6 text-ink-soft">{m.blurb}</p>
+      {showOpen ? (
         <div
-          className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold"
+          className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold"
           style={{ color: "var(--brand-red)" }}
         >
           Open
@@ -178,52 +233,8 @@ function ModuleCard({ module: m }: { module: Module }) {
             →
           </span>
         </div>
-      </Link>
-    );
-  }
-
-  return (
-    <div
-      aria-disabled
-      className="relative flex cursor-default flex-col gap-3 rounded-2xl border border-line bg-white p-5 shadow-sm opacity-80"
-    >
-      <CardHeader module={m} isLive={false} />
-      <CardBody module={m} isLive={false} />
+      ) : null}
     </div>
-  );
-}
-
-function CardHeader({ module: m, isLive }: { module: Module; isLive: boolean }) {
-  return (
-    <div className="flex items-start justify-between gap-3">
-      <span
-        className="grid h-10 w-10 place-items-center rounded-xl"
-        style={{
-          background: isLive
-            ? "var(--brand-red-soft)"
-            : "var(--brand-surface-soft)",
-          color: isLive ? "var(--brand-red)" : "var(--brand-ink-soft)",
-        }}
-      >
-        {m.icon}
-      </span>
-      <Badge status={m.status} />
-    </div>
-  );
-}
-
-function CardBody({ module: m, isLive }: { module: Module; isLive: boolean }) {
-  return (
-    <>
-      <h3
-        className={`text-base font-semibold tracking-tight sm:text-lg ${
-          isLive ? "text-ink" : "text-ink-soft"
-        }`}
-      >
-        {m.name}
-      </h3>
-      <p className="text-sm leading-6 text-ink-soft">{m.blurb}</p>
-    </>
   );
 }
 
