@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Class 101 brand */
+  --brand-red: #e1251b;
+  --brand-red-hover: #c41f16;
+  --brand-red-soft: #fde8e6;
+  --brand-gold: #ffbc00;
+  --brand-gold-soft: #fff5d6;
+  --brand-ink: #0f172a;
+  --brand-ink-soft: #334155;
+  --brand-muted: #64748b;
+  --brand-line: #e2e8f0;
+  --brand-surface: #ffffff;
+  --brand-surface-soft: #f8fafc;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand: var(--brand-red);
+  --color-brand-hover: var(--brand-red-hover);
+  --color-brand-soft: var(--brand-red-soft);
+  --color-gold: var(--brand-gold);
+  --color-gold-soft: var(--brand-gold-soft);
+  --color-ink: var(--brand-ink);
+  --color-ink-soft: var(--brand-ink-soft);
+  --color-muted: var(--brand-muted);
+  --color-line: var(--brand-line);
+  --color-surface: var(--brand-surface);
+  --color-surface-soft: var(--brand-surface-soft);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--brand-surface);
+  color: var(--brand-ink);
+}
+
+/* Class 101 brand typography:
+ * - Body / UI: Work Sans (default via font-sans)
+ * - Headlines: Barlow ExtraBold (800)
+ *
+ * !important is intentional: many existing heading elements use Tailwind's
+ * font-bold (700) which has higher selector specificity than this rule.
+ * Brand typography should always win.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+}
+
+/* Subtle brand-aware focus ring */
+*:focus-visible {
+  outline: 2px solid var(--brand-red);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Class 101 corporate-style CTA buttons.
+ * Reference: gold solid rectangles with uppercase white text, used across
+ * class101.com (e.g. "VISIT LOCATION", "FIND YOUR LOCATION", "GET DIRECTIONS").
+ * Use `cta-primary` for the dominant action on a screen. Use `cta-primary-lg`
+ * when you want a marketing-sized hit area (landing page, login).
+ *
+ * Red stays reserved for brand identity, status pills, and active nav state.
+ * ------------------------------------------------------------------------- */
+
+.cta-primary,
+.cta-primary-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--brand-gold);
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 120ms ease, transform 120ms ease;
+}
+.cta-primary {
+  height: 38px;
+  padding: 0 18px;
+  font-size: 12px;
+}
+.cta-primary-lg {
+  height: 48px;
+  padding: 0 24px;
+  font-size: 13px;
+}
+.cta-primary:hover,
+.cta-primary-lg:hover {
+  background: #e5a900;
+}
+.cta-primary:disabled,
+.cta-primary-lg:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
