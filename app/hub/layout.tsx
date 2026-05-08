@@ -49,16 +49,16 @@ export default async function HubLayout({
   const memberships = await listMyMemberships();
   const active = await getActiveFranchise(memberships);
 
-  // Seed demo students into the active franchise the first time a user
-  // lands in it. No-op for franchises that already have students.
-  if (userId && active) {
+  // Seed demo data into the active franchise the first time a user
+  // lands in it. Set DISABLE_DEMO_SEED=1 in the environment to skip all
+  // three seeders (e.g. for production tenants who don't want demo
+  // content). Existing rows always short-circuit each seeder regardless.
+  const demoSeedDisabled = /^(1|true|yes)$/i.test(
+    process.env.DISABLE_DEMO_SEED ?? "",
+  );
+  if (userId && active && !demoSeedDisabled) {
     await ensureSeededStudents(userId, active.franchise.id);
-    // After students exist, drop in a small set of demo sessions per student
-    // so the Notes Synthesizer feels populated. No-op once any session
-    // exists in the franchise.
     await ensureSeededSessions(userId, active.franchise.id);
-    // One polished demo essay per student so the side-by-side view is
-    // discoverable on first visit. No-op once any essay exists.
     await ensureSeededEssays(userId, active.franchise.id);
   }
 
