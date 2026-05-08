@@ -18,9 +18,9 @@ const barlow = Barlow({
 });
 
 export const metadata: Metadata = {
-  title: "Class 101 AI Hub",
+  title: "Class 101 Ai Hub",
   description:
-    "Your AI co-pilot for college advising. Built for Class 101 counselors.",
+    "Your Ai co-pilot for college advising. Built for Class 101 counselors.",
   robots: { index: false, follow: false },
 };
 

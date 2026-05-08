@@ -15,7 +15,7 @@ const MODEL = "anthropic/claude-sonnet-4.5";
 type Body = {
   prompt: string;
   draft: string;
-  // Structured audience context. All optional, but when provided the AI
+  // Structured audience context. All optional, but when provided the Ai
   // gets concrete signals instead of freeform notes.
   schoolOrScholarship?: string;
   applicationType?: string; // "common-app" | "supplement" | "scholarship" | "other"
@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Pull the student profile when linked, so the AI can tailor advice.
+  // Pull the student profile when linked, so the Ai can tailor advice.
   let studentBlock: string | null = null;
   if (body?.studentId) {
     const { data: stu } = await supabase
@@ -160,7 +160,7 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
         "HTTP-Referer":
           process.env.NEXT_PUBLIC_APP_URL ?? "https://class101.ai",
-        "X-Title": "Class 101 AI Hub",
+        "X-Title": "Class 101 Ai Hub",
       },
       body: JSON.stringify({
         model: MODEL,

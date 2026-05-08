@@ -283,7 +283,7 @@ export function EssayEditor({ initial }: { initial?: EssayEditorInitial }) {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             rows={2}
-            placeholder="Anything the AI should know about voice, audience, or what to focus on."
+            placeholder="Anything the Ai should know about voice, audience, or what to focus on."
             className={textareaClass}
           />
         </Field>
@@ -555,7 +555,7 @@ export function ResultView({
             <PlainText body={original} />
           )}
         </DraftPanel>
-        <DraftPanel label="Revised (AI)">
+        <DraftPanel label="Revised (Ai)">
           {diffMode === "diff" ? (
             <DiffText changes={changes} side="revised" />
           ) : (

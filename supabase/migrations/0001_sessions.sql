@@ -1,5 +1,5 @@
--- Class 101 AI Hub — Notes Synthesizer
--- Stores transcript + AI summary per session.
+-- Class 101 Ai Hub — Notes Synthesizer
+-- Stores transcript + Ai summary per session.
 -- Audio is intentionally NEVER persisted.
 
 create table if not exists public.sessions (

@@ -4,6 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Wordmark } from "@/components/wordmark";
+import {
+  HubIcon,
+  NotesIcon,
+  ListIcon,
+  EssayIcon,
+  ScholarshipIcon,
+  StudentsIcon,
+  AdminIcon,
+} from "@/components/module-icons";
 
 type NavItem = {
   label: string;
@@ -23,7 +32,7 @@ type NavGroup = {
 const NAV: NavGroup[] = [
   {
     items: [
-      { label: "AI Hub", href: "/hub", icon: <HubIcon />, status: "live" },
+      { label: "Ai Hub", href: "/hub", icon: <HubIcon />, status: "live" },
       {
         label: "Notes Synthesizer",
         href: "/hub/notes-synthesizer",
@@ -135,7 +144,7 @@ export function HubSidebar({
           <MenuIcon />
         </button>
         <Link href="/hub" className="text-sm font-semibold tracking-tight text-ink">
-          Class 101 · AI Hub
+          Class 101 · Ai Hub
         </Link>
         <form action={signOutAction}>
           <button
@@ -377,66 +386,6 @@ export function HubSidebar({
 
 // ---- Icons ---------------------------------------------------------------
 
-function HubIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <rect x="3" y="3" width="7" height="7" rx="1.5" />
-      <rect x="14" y="3" width="7" height="7" rx="1.5" />
-      <rect x="3" y="14" width="7" height="7" rx="1.5" />
-      <rect x="14" y="14" width="7" height="7" rx="1.5" />
-    </svg>
-  );
-}
-function NotesIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M4 4h12l4 4v12H4z" />
-      <path d="M16 4v4h4" />
-      <path d="M8 13h8M8 17h6" />
-    </svg>
-  );
-}
-function ListIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M3 6h18M3 12h18M3 18h12" />
-    </svg>
-  );
-}
-function EssayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M14 3l7 7-11 11H3v-7z" />
-      <path d="M13 4l7 7" />
-    </svg>
-  );
-}
-function ScholarshipIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M2 9l10-5 10 5-10 5z" />
-      <path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
-    </svg>
-  );
-}
-function StudentsIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <circle cx="9" cy="8" r="3.2" />
-      <path d="M2.5 20c0-3.3 2.9-5.6 6.5-5.6S15.5 16.7 15.5 20" />
-      <circle cx="17" cy="9.5" r="2.6" />
-      <path d="M15.5 14.5c3 0 6 1.7 6 4.5" />
-    </svg>
-  );
-}
-function AdminIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z" />
-      <path d="M9 12l2 2 4-4" />
-    </svg>
-  );
-}
 function MenuIcon() {
   return (
     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>

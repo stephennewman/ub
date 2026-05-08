@@ -138,7 +138,7 @@ Return JSON only.`;
         Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
         "HTTP-Referer": process.env.NEXT_PUBLIC_APP_URL ?? "https://class101.ai",
-        "X-Title": "Class 101 AI Hub",
+        "X-Title": "Class 101 Ai Hub",
       },
       body: JSON.stringify({
         model: MODEL,

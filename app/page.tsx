@@ -46,7 +46,7 @@ function SiteHeader({ isAuthed }: { isAuthed: boolean }) {
           href={isAuthed ? "/hub" : "/login"}
           className="cta-primary"
         >
-          {isAuthed ? "View AI Hub" : "Sign in"}
+          {isAuthed ? "View Ai Hub" : "Sign in"}
         </Link>
       </div>
     </header>
@@ -87,7 +87,7 @@ function Hero({ isAuthed }: { isAuthed: boolean }) {
                 href={isAuthed ? "/hub" : "/login"}
                 className="cta-primary-lg"
               >
-                {isAuthed ? "View AI Hub" : "Sign in to the AI Hub"}
+                {isAuthed ? "View Ai Hub" : "Sign in to the Ai Hub"}
               </Link>
               <a
                 href="#modules"
@@ -439,7 +439,7 @@ function HowItWorks() {
       body: "Eyes on the student, not the laptop. Record on your phone or in the browser, or paste a transcript afterward.",
     },
     {
-      title: "AI does the synthesis",
+      title: "Ai does the synthesis",
       body: "Class 101 house style, structured sections, and a gap analysis across the planning pillars — every time.",
     },
     {
@@ -488,10 +488,10 @@ function FAQ() {
   const faqs = [
     {
       q: "Will this replace what I do?",
-      a: "No. The AI gets you to a great starting point in seconds — your judgment, your relationship with the family, and your expertise still drive the meeting. Think of it as the assistant you never had time to hire.",
+      a: "No. The Ai gets you to a great starting point in seconds — your judgment, your relationship with the family, and your expertise still drive the meeting. Think of it as the assistant you never had time to hire.",
     },
     {
-      q: "Can I edit what the AI gives me?",
+      q: "Can I edit what the Ai gives me?",
       a: "Always. Every summary is a starting draft. You can edit the transcript and re-synthesize, copy and paste into your platform, or download as a Markdown file and tweak in any editor.",
     },
     {
@@ -568,7 +568,7 @@ function CTA({ isAuthed }: { isAuthed: boolean }) {
           className="mt-8 inline-flex h-12 items-center justify-center bg-white px-7 text-base font-semibold uppercase tracking-wide shadow-sm transition-colors hover:bg-white/90"
           style={{ color: "var(--brand-red)" }}
         >
-          {isAuthed ? "View AI Hub" : "Sign in to try it"}
+          {isAuthed ? "View Ai Hub" : "Sign in to try it"}
         </Link>
       </div>
     </section>

@@ -37,7 +37,7 @@ export default async function LoginPage({
                 Welcome back
               </h1>
               <p className="text-sm text-ink-soft">
-                Sign in to access the AI Hub.
+                Sign in to access the Ai Hub.
               </p>
             </div>
             <LoginForm next={next ?? "/hub"} notice={notice} />
@@ -74,7 +74,7 @@ export default async function LoginPage({
             College planning, made simple — and made faster.
           </h2>
           <p className="text-white/85">
-            Class 101 AI Hub turns recorded sessions, essay drafts, and college
+            Class 101 Ai Hub turns recorded sessions, essay drafts, and college
             research into polished work product — in your house style. So
             counselors can keep their eyes on the student.
           </p>

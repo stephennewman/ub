@@ -1,4 +1,4 @@
--- Class 101 AI Hub — Student profiles.
+-- Class 101 Ai Hub — Student profiles.
 -- Each counselor (auth.users row) owns their student records.
 -- Sessions can optionally link to a student via sessions.student_id.
 

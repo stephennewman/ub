@@ -1,4 +1,4 @@
--- Class 101 AI Hub — Seed real franchise locations (pulled from class101.com/locations).
+-- Class 101 Ai Hub — Seed real franchise locations (pulled from class101.com/locations).
 alter table public.franchises add column if not exists city text;
 alter table public.franchises add column if not exists state text;
 

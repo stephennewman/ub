@@ -7,6 +7,8 @@ import {
   SessionsView,
   type SessionRow,
 } from "./sessions-view";
+import { PageHeader } from "@/components/page-header";
+import { NotesIcon } from "@/components/module-icons";
 
 export default async function NotesSynthesizerListPage() {
   const supabase = await createClient();
@@ -39,22 +41,18 @@ export default async function NotesSynthesizerListPage() {
 
   return (
     <div className="mx-auto max-w-[1400px] px-5 py-4 sm:px-8 sm:py-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <div className="space-y-1.5">
-          <h1 className="text-2xl tracking-tight text-ink sm:text-3xl">
-            Synthesize a student meeting.
-          </h1>
-          <p className="max-w-4xl text-sm text-ink-soft sm:text-base">
-            Record or paste a session transcript, and get a Class 101–style
-            summary with analysis.
-          </p>
-        </div>
-        <Suspense fallback={null}>
-          <NewSessionButton className="cta-primary">
-            + New session
-          </NewSessionButton>
-        </Suspense>
-      </header>
+      <PageHeader
+        icon={<NotesIcon size={22} />}
+        title="Notes Synthesizer"
+        subtitle="Record or paste a session transcript, and get a Class 101–style summary with analysis."
+        actions={
+          <Suspense fallback={null}>
+            <NewSessionButton className="cta-primary">
+              + New session
+            </NewSessionButton>
+          </Suspense>
+        }
+      />
 
       {error ? (
         <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">

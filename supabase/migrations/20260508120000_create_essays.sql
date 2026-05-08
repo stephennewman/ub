@@ -1,5 +1,5 @@
--- Class 101 AI Hub — Essay Editor
--- Stores the original draft, prompt, and AI-revised output for each essay
+-- Class 101 Ai Hub — Essay Editor
+-- Stores the original draft, prompt, and Ai-revised output for each essay
 -- review. Scoped by franchise (matches students/sessions tenancy model).
 
 create table if not exists public.essays (

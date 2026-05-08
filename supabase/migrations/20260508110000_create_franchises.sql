@@ -1,4 +1,4 @@
--- Class 101 AI Hub — Franchise tenancy.
+-- Class 101 Ai Hub — Franchise tenancy.
 --
 -- Introduces multi-tenant scoping so a single counselor can belong to one or
 -- more franchise locations, and content (students, sessions, future essays)

@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
           // OpenRouter likes these headers for attribution / rate limit tiering.
           "HTTP-Referer":
             process.env.NEXT_PUBLIC_APP_URL ?? "https://class101.ai",
-          "X-Title": "Class 101 AI Hub",
+          "X-Title": "Class 101 Ai Hub",
         },
         body: JSON.stringify({
           model: MODEL,

@@ -3,9 +3,11 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveStudent } from "@/lib/students/queries";
 import { getActiveFranchiseId } from "@/lib/franchises/queries";
 import { EssaysView, NewEssayButton, type EssayRow } from "./essays-view";
+import { PageHeader } from "@/components/page-header";
+import { EssayIcon } from "@/components/module-icons";
 
 export const metadata = {
-  title: "Essay Editor — Class 101 AI Hub",
+  title: "Essay Editor — Class 101 Ai Hub",
 };
 
 type EssayRowFromDb = {
@@ -77,22 +79,18 @@ export default async function EssayEditorListPage() {
 
   return (
     <div className="mx-auto max-w-[1400px] px-5 py-4 sm:px-8 sm:py-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <div className="space-y-1.5">
-          <h1 className="text-2xl tracking-tight text-ink sm:text-3xl">
-            Polish a student&rsquo;s essay.
-          </h1>
-          <p className="max-w-4xl text-sm text-ink-soft sm:text-base">
-            Paste a draft and the prompt. The AI returns a house-style revision
-            with teaching comments side-by-side.
-          </p>
-        </div>
-        <Suspense fallback={null}>
-          <NewEssayButton className="cta-primary">
-            + New essay polish
-          </NewEssayButton>
-        </Suspense>
-      </header>
+      <PageHeader
+        icon={<EssayIcon size={22} />}
+        title="Essay Editor"
+        subtitle="Paste a draft and the prompt. The Ai returns a house-style revision with teaching comments side-by-side."
+        actions={
+          <Suspense fallback={null}>
+            <NewEssayButton className="cta-primary">
+              + New essay polish
+            </NewEssayButton>
+          </Suspense>
+        }
+      />
 
       {error ? (
         <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">

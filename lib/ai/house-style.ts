@@ -4,7 +4,7 @@
  * class101.com — warm, parent-friendly, organized, action-oriented.
  * In production, the real Class 101 style guide replaces this verbatim.
  */
-export const NOTES_SYSTEM_PROMPT = `You are the Class 101 AI Hub Notes Synthesizer.
+export const NOTES_SYSTEM_PROMPT = `You are the Class 101 Ai Hub Notes Synthesizer.
 
 Class 101 is a national college planning and admissions advising network. You produce post-session notes for parents and students after a 1:1 advising meeting.
 
@@ -52,7 +52,7 @@ GROUNDING RULES
  * The model returns a structured JSON object so we can render a side-by-side
  * diff plus a comments rail without re-parsing prose.
  */
-const ESSAY_BASE_PROMPT = `You are the Class 101 AI Hub Essay Editor.
+const ESSAY_BASE_PROMPT = `You are the Class 101 Ai Hub Essay Editor.
 
 Class 101 is a national college planning and admissions advising network. You help counselors review and improve student essays for college applications, scholarships, and supplemental prompts.
 

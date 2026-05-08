@@ -7,43 +7,43 @@ type Crumb = { label: string; href?: string };
 
 /**
  * Maps the current pathname to a breadcrumb trail. Keep this list in sync
- * as new hub routes are added; unknown sub-paths fall back to "AI Hub".
+ * as new hub routes are added; unknown sub-paths fall back to "Ai Hub".
  */
 function trailFor(pathname: string): Crumb[] {
   if (pathname === "/hub") {
-    return [{ label: "AI Hub" }];
+    return [{ label: "Ai Hub" }];
   }
   if (pathname.startsWith("/hub/notes-synthesizer")) {
     return [
-      { label: "AI Hub", href: "/hub" },
+      { label: "Ai Hub", href: "/hub" },
       { label: "Notes Synthesizer" },
     ];
   }
   if (pathname.startsWith("/hub/college-list")) {
     return [
-      { label: "AI Hub", href: "/hub" },
+      { label: "Ai Hub", href: "/hub" },
       { label: "College List" },
     ];
   }
   if (pathname.startsWith("/hub/essay-editor")) {
     return [
-      { label: "AI Hub", href: "/hub" },
+      { label: "Ai Hub", href: "/hub" },
       { label: "Essay Editor" },
     ];
   }
   if (pathname.startsWith("/hub/students")) {
     return [
-      { label: "AI Hub", href: "/hub" },
+      { label: "Ai Hub", href: "/hub" },
       { label: "Students" },
     ];
   }
   if (pathname.startsWith("/hub/admin")) {
     return [
-      { label: "AI Hub", href: "/hub" },
+      { label: "Ai Hub", href: "/hub" },
       { label: "Admin" },
     ];
   }
-  return [{ label: "AI Hub", href: "/hub" }];
+  return [{ label: "Ai Hub", href: "/hub" }];
 }
 
 export function TopBarBreadcrumb() {
