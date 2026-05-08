@@ -8,6 +8,7 @@ import {
   listStudents,
 } from "@/lib/students/queries";
 import { ensureSeededSessions } from "@/lib/sessions/seed";
+import { ensureSeededEssays } from "@/lib/essays/seed";
 import { ActiveStudentProvider } from "@/lib/students/context";
 import { ActiveFranchiseProvider } from "@/lib/franchises/context";
 import {
@@ -56,6 +57,9 @@ export default async function HubLayout({
     // so the Notes Synthesizer feels populated. No-op once any session
     // exists in the franchise.
     await ensureSeededSessions(userId, active.franchise.id);
+    // One polished demo essay per student so the side-by-side view is
+    // discoverable on first visit. No-op once any essay exists.
+    await ensureSeededEssays(userId, active.franchise.id);
   }
 
   const [students, activeStudent] = await Promise.all([
