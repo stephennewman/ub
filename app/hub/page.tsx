@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { FranchiseChip } from "@/components/franchise-chip";
+import { StudentPicker } from "@/components/student-picker";
 
 type ModuleStatus = "live" | "next" | "soon";
 
@@ -17,7 +19,7 @@ const modules: Module[] = [
     name: "Notes Synthesizer",
     status: "live",
     blurb:
-      "Record or paste a session transcript. Get a structured Class 101 summary with next steps and pillar gap analysis.",
+      "Record or paste a session transcript. Get a Class 101 summary with next steps and pillar gap analysis.",
     href: "/hub/notes-synthesizer",
     icon: <NotesIcon />,
   },
@@ -52,20 +54,103 @@ const modules: Module[] = [
 export default function HubHome() {
   return (
     <div className="mx-auto max-w-[1400px] px-5 py-5 sm:px-8 sm:py-6">
-      <div className="space-y-1.5">
-        <h1 className="text-2xl tracking-tight text-ink sm:text-3xl">
-          Pick a workflow.
-        </h1>
-        <p className="max-w-4xl text-sm text-ink-soft sm:text-base">
-          Three modules are live for this preview. More are on the way.
+      <div className="grid gap-6 lg:grid-cols-12">
+        <section className="lg:col-span-5">
+          <WelcomeCard />
+        </section>
+
+        <section className="lg:col-span-7">
+          <div className="mb-3 flex items-end justify-between">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">
+              Workflows
+            </h2>
+            <p className="text-xs text-muted">
+              {modules.filter((m) => m.status === "live").length} live ·{" "}
+              {modules.filter((m) => m.status !== "live").length} coming soon
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {modules.map((m) => (
+              <ModuleCard key={m.slug} module={m} />
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+function WelcomeCard() {
+  return (
+    <div className="rounded-2xl border border-line bg-white p-6 shadow-sm sm:p-7">
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+        Welcome
+      </p>
+      <h1 className="mt-1.5 text-2xl tracking-tight text-ink sm:text-3xl">
+        Class 101 AI Hub
+      </h1>
+      <p className="mt-3 text-sm leading-6 text-ink-soft sm:text-base">
+        A working set of AI tools for college counselors — built around how
+        Class 101 actually advises. Synthesize a meeting in seconds, polish an
+        essay in your house style, and build a fit-driven college list grounded
+        in real Scorecard data.
+      </p>
+
+      <div className="mt-6 space-y-3">
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+          Get set up
         </p>
+
+        <div className="flex flex-col gap-2">
+          <SetupRow
+            step={1}
+            label="Pick your location"
+            hint="The franchise everything below scopes to."
+          >
+            <FranchiseChip />
+          </SetupRow>
+          <SetupRow
+            step={2}
+            label="Pick a student"
+            hint="Optional — narrows tools to a single student."
+          >
+            <StudentPicker />
+          </SetupRow>
+        </div>
       </div>
 
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        {modules.map((m) => (
-          <ModuleCard key={m.slug} module={m} />
-        ))}
+      <p className="mt-6 text-xs text-muted">
+        You can change either at any time from the top bar.
+      </p>
+    </div>
+  );
+}
+
+function SetupRow({
+  step,
+  label,
+  hint,
+  children,
+}: {
+  step: number;
+  label: string;
+  hint?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-start gap-3 rounded-xl border border-line bg-surface-soft/50 px-3 py-3">
+      <span
+        className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs font-bold text-white"
+        style={{ background: "var(--brand-red)" }}
+        aria-hidden
+      >
+        {step}
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="text-sm font-semibold text-ink">{label}</p>
+        {hint ? <p className="text-xs text-ink-soft">{hint}</p> : null}
       </div>
+      <div className="shrink-0">{children}</div>
     </div>
   );
 }
@@ -77,15 +162,15 @@ function ModuleCard({ module: m }: { module: Module }) {
     return (
       <Link
         href={m.href}
-        className="group relative flex flex-col gap-3 rounded-2xl border border-line bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+        className="group relative flex flex-col gap-3 rounded-2xl border border-line bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
       >
         <CardHeader module={m} isLive />
         <CardBody module={m} isLive />
         <div
-          className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold"
+          className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold"
           style={{ color: "var(--brand-red)" }}
         >
-          Open module
+          Open
           <span
             aria-hidden
             className="transition-transform group-hover:translate-x-0.5"
@@ -100,7 +185,7 @@ function ModuleCard({ module: m }: { module: Module }) {
   return (
     <div
       aria-disabled
-      className="relative flex cursor-default flex-col gap-3 rounded-2xl border border-line bg-white p-6 opacity-80"
+      className="relative flex cursor-default flex-col gap-3 rounded-2xl border border-line bg-white p-5 shadow-sm opacity-80"
     >
       <CardHeader module={m} isLive={false} />
       <CardBody module={m} isLive={false} />
@@ -112,7 +197,7 @@ function CardHeader({ module: m, isLive }: { module: Module; isLive: boolean }) 
   return (
     <div className="flex items-start justify-between gap-3">
       <span
-        className="grid h-11 w-11 place-items-center rounded-xl"
+        className="grid h-10 w-10 place-items-center rounded-xl"
         style={{
           background: isLive
             ? "var(--brand-red-soft)"
@@ -131,7 +216,7 @@ function CardBody({ module: m, isLive }: { module: Module; isLive: boolean }) {
   return (
     <>
       <h3
-        className={`text-xl font-semibold tracking-tight ${
+        className={`text-base font-semibold tracking-tight sm:text-lg ${
           isLive ? "text-ink" : "text-ink-soft"
         }`}
       >
@@ -173,17 +258,7 @@ function Badge({ status }: { status: ModuleStatus }) {
 
 function NotesIcon() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      width="22"
-      height="22"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M4 4h12l4 4v12a0 0 0 0 1 0 0H4z" />
       <path d="M16 4v4h4" />
       <path d="M8 13h8M8 17h6" />
@@ -192,7 +267,7 @@ function NotesIcon() {
 }
 function EssayIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M14 3l7 7-11 11H3v-7z" />
       <path d="M13 4l7 7" />
     </svg>
@@ -200,14 +275,14 @@ function EssayIcon() {
 }
 function ListIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M3 6h18M3 12h18M3 18h12" />
     </svg>
   );
 }
 function ScholarshipIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M2 9l10-5 10 5-10 5z" />
       <path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
     </svg>
